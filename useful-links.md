@@ -1,7 +1,7 @@
 # Useful Links
 
-* \[Some introductory slides for beginners]\([https://github.com/yongbinfeng/SONICTutorial/blob/master/files/SONIC\_Introduction\_MLHATS.pdf](files/SONIC\_Introduction\_MLHATS.pdf))
-* \[Nvidia Triton Inference server document]\([https://docs.nvidia.com/deeplearning/triton-inference-server/archives/triton\_inference\_server\_230/user-guide/docs/](https://docs.nvidia.com/deeplearning/triton-inference-server/archives/triton\_inference\_server\_230/user-guide/docs/))
+* Some introductory slides for beginners: [Link](files/SONIC\_Introduction\_MLHATS.pdf)
+* Nvidia Triton Inference server document: [Link](https://docs.nvidia.com/deeplearning/triton-inference-server/archives/triton\_inference\_server\_230/user-guide/docs/)
 * \[Distributed documents with more details and lastest developments]\([https://github.com/triton-inference-server/server/tree/main/docs](https://github.com/triton-inference-server/server/tree/main/docs))
 * \[SONIC Core module in CMSSW]\([https://github.com/cms-sw/cmssw/tree/master/HeterogeneousCore/SonicCore](https://github.com/cms-sw/cmssw/tree/master/HeterogeneousCore/SonicCore))
 * \[SONIC Triton module in CMSSW]\([https://github.com/cms-sw/cmssw/tree/master/HeterogeneousCore/SonicTriton](https://github.com/cms-sw/cmssw/tree/master/HeterogeneousCore/SonicTriton))
