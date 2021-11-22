@@ -1,3 +1,4 @@
 # Table of contents
 
-* [Page 1](README.md)
+* [SONIC Tutorial](README.md)
+* [Useful Links](useful-links.md)
