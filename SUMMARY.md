@@ -8,4 +8,5 @@
   * [Model Configuration](sonic-models/model-configuration.md)
   * [Model optimization](sonic-models/model-optimization.md)
 * [SONIC Producers](sonic-producers.md)
+* [Latency and Throughput Benchmark](latency-and-throughput-benchmark.md)
 * [A full working demo](a-full-working-demo.md)
