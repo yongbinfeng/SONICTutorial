@@ -10,7 +10,7 @@ Readers are strongly encouraged to go through the [introductory slides](files/SO
 
 SONIC is the short name for Service for Optimized Network Inference on Coprocessors. It is based on inference as a service. Instead of the usual case where the coprocessors (GPUs, FPGAs, ASICs) are directly connected to the CPUs, as-a-Service connects the CPUs and coprocessors via networks. As shown in the diagram below, with as-a-Service computing, clients only need to communicate with the server and handle the IOs, and the servers will direct the coprocessors for computing.
 
-![Direct connection vs as-a-service](<.gitbook/assets/image (1).png>)
+![Direct connection vs as-a-service](<.gitbook/assets/image (1) (1).png>)
 
 As-a-service computing has a lot of benefits. For example:
 
@@ -21,6 +21,6 @@ As-a-service computing has a lot of benefits. For example:
 
 In CMSSW, we set up the [SONIC workflow](https://github.com/cms-sw/cmssw/tree/master/HeterogeneousCore/SonicCore) to run inference as a service. The clients are deployed in CMSSW to handle the IOs; [Nvidia Triton Inference server](https://github.com/triton-inference-server/server) is chosen to run inferences for Machine-Learning models (and also classical domain algorithms), as shown below in the diagram.
 
-![SONIC in CMSSW](.gitbook/assets/image.png)
+![SONIC in CMSSW](<.gitbook/assets/image (1).png>)
 
 Some useful links to the relevant papers, documents, and code, and also some step-by-step instructions to set up the model and producers are provided in the following sections.

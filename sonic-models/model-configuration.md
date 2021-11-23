@@ -124,6 +124,8 @@ output [
 ]
 ```
 
+**Note** for Pytorch models, the input and output names are arbitrary. What is crucial are the numbers at the end. A Pytorch model example can be found [here](https://github.com/fastmachinelearning/sonic-models/blob/master/models/particlenet\_AK4\_PT/config.pbtxt#L7-L45).
+
 After preparing the model directory, you could test if it works by launching the Triton server with docker or singularity:
 
 ```
