@@ -23,3 +23,4 @@ In CMSSW, we set up the [SONIC workflow](https://github.com/cms-sw/cmssw/tree/ma
 
 ![SONIC in CMSSW](.gitbook/assets/image.png)
 
+Some useful links to the relevant papers, documents, and code, and also some step-by-step instructions to set up the model and producers are provided in the following sections.
