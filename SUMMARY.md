@@ -8,3 +8,4 @@
   * [Model Configuration](sonic-models/model-configuration.md)
   * [Model optimization](sonic-models/model-optimization.md)
 * [SONIC Producers](sonic-producers.md)
+* [A full working demo](a-full-working-demo.md)
