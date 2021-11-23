@@ -1,17 +1,8 @@
 ---
-description: documents on the format of the model configuration and the optimizations
+description: document on how to prepare the model files
 ---
 
-# Model configuration
-
-Currently SONIC uses [Nvidia Triton Inference Server](https://github.com/triton-inference-server/server) on the server side. It has a lot of nice features as explained in their git repo. Among these two of the most attractive features for us:
-
-* it supports various backends: Tensorflow, TensorRT, Pytorch,ONNX, ScikitLearn, and also custom backends for non-ML algorithms
-* Dynamic batching: dynamically batch the inference requests on the server side to make more efficient usage of the coprocessors
-
-To deploy the models for Triton, we need to set up the model configurations. Examples of our current SONIC models can be found [here](https://github.com/fastmachinelearning/sonic-models/tree/master/models).
-
-### Model configuration
+# Model Configuration
 
 Triton's document on the model configuration can be found [here](https://github.com/triton-inference-server/server/blob/main/docs/model\_configuration.md), which includes a lot of details.&#x20;
 
@@ -133,5 +124,27 @@ output [
 ]
 ```
 
-### Model optimization
+After preparing the model directory, you could test if it works by launching the Triton server with docker or singularity:
 
+```
+docker pull nvcr.io/nvidia/tritonserver:21.10-py3
+docker run --gpus=1 --rm -p8000:8000 -p8001:8001 -p8002:8002 -v/full/path/to/docs/examples/model_repository:/models nvcr.io/nvidia/tritonserver:21.10-py3 tritonserver --model-repository=/models
+```
+
+Some logs should be printed out and finally end with
+
+```
++----------------------+---------+--------+
+| Model                | Version | Status |
++----------------------+---------+--------+
+| <model_name>         | <v>     | READY  |
+| ..                   | .       | ..     |
+| ..                   | .       | ..     |
++----------------------+---------+--------+
+...
+...
+...
+I1002 21:58:57.891440 62 grpc_server.cc:3914] Started GRPCInferenceService at 0.0.0.0:8001
+I1002 21:58:57.893177 62 http_server.cc:2717] Started HTTPService at 0.0.0.0:8000
+I1002 21:58:57.935518 62 http_server.cc:2736] Started Metrics Service at 0.0.0.0:8002
+```
