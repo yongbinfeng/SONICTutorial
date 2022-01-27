@@ -20,7 +20,7 @@ Launch the triton server with the model \`add\_sub\` saved in the repository:
 docker run -it --gpus=1 --rm -p8000:8000 -p8001:8001 -p8002:8002 -v/Path_To_TritonDemo/models/:/models nvcr.io/nvidia/tritonserver:21.10-py3 tritonserver --model-repository=/models/
 ```
 
-replace the \`Path\_To\_TritonDemo\` with your local path. Once you get
+replace the \`Path\_To\_TritonDemo\` with your local path. Once you get:
 
 ```
 I0127 20:32:59.318041 1 server.cc:592] 
@@ -35,7 +35,7 @@ I0127 20:32:59.323244 1 http_server.cc:2815] Started HTTPService at 0.0.0.0:8000
 I0127 20:32:59.365762 1 http_server.cc:167] Started Metrics Service at 0.0.0.0:8002
 ```
 
-It means the server is well setup and ready for inference requests.
+it means the server is well setup and ready for inference requests.
 
 Then launch a client container and run the test script:
 
