@@ -49,7 +49,5 @@ python test.py
 To run with the ParticleNet model,&#x20;
 
 ```
-python test.py -m "particlenet_AK4"
+python test.py -m "particlenet_PT"
 ```
-
-**Note** the server has to be changed to some elder version to properly support ONNX models. Tested and it works well with `nvcr.io/nvidia/tritonserver:21.02-py3`
