@@ -97,7 +97,7 @@ which includes the throughput, latency, and some metrics on the server side. The
 
 One example script to loop over some models and varying the batch size is attached here:
 
-```py
+```python
 import os
 from collections import OrderedDict
 import subprocess
@@ -123,7 +123,7 @@ This loops over two models and measures the throughputs and latency by varying t
 
 Then the outputs can be visualized using the csv files. One example script is provide here:
 
-```py
+```python
 import csv
 import os
 from collections import OrderedDict
