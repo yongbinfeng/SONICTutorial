@@ -50,7 +50,7 @@ Note this would require some preprocessing and warmup time for the first inferen
 
 ### Run tests with Perf Client
 
-One can explore the optimal model configuration for deployment by running throughput and latency tests and benchmarks via [perf client](https://github.com/triton-inference-server/server/blob/main/docs/perf\_analyzer.md).&#x20;
+One can explore the optimal model configuration for deployment by running throughput and latency tests and benchmarks via [perf client](https://github.com/triton-inference-server/server/blob/main/docs/user\_guide/perf\_analyzer.md) (also called ``perf analyzer'').&#x20;
 
 To run perf client, first launch the Triton server serving the models via
 
@@ -95,12 +95,128 @@ Concurrency: 4, throughput: 83 infer/sec, latency 48064 usec
 
 which includes the throughput, latency, and some metrics on the server side. The outputs can be saved into csv files by adding `-f output.csv` to the end.
 
-Then one can scan different batch sizes, concurrencies, etc and compare the performance. One example for DeepTau\_nosplit is shown in the following point:&#x20;
+One example script to loop over some models and varying the batch size is attached here:
+
+```
+import os
+from collections import OrderedDict
+import subprocess
+
+commands = OrderedDict()
+commands['particlenet_AK4'] = "perf_analyzer -m particlenet_AK4 --percentile=95 -u localhost:8021 --shape pf_points:2,50 --shape pf_features:20,50 --shape pf_mask:1,50 --shape sv_points:2,4 --shape sv_features:11,4 --shape sv_mask:1,4 -i grpc --async -p 9000 --concurrency-range 4:4 -b"
+commands['deeptau_nosplit'] = "perf_analyzer -m deeptau_nosplit --percentile=95 -u localhost:8021 -i grpc --async -p 9000 --concurrency-range 4:4 -b"
+
+outdir = "/output/"
+
+for model, command in commands.items():
+    outdir = f"/output/{model}"
+    if not os.path.isdir(outdir):
+        subprocess.run(f"mkdir -p {outdir}", shell=True)
+    for batch in [1, 4, 8, 16, 32, 64, 128]:
+        tmp = command
+        tmp += f" {batch} -f {outdir}/{model}_batch{batch}.csv"
+        print(tmp)
+        subprocess.run(f"{tmp}", shell=True)
+```
+
+This loops over two models and measures the throughputs and latency by varying the batch sizes, with the outputs saved to `{outdir}/{model}/{model}_{batch}.csv`. One can scan different concurrencies, model instances, etc and compare the performance using a similar setup. 
+
+Then the outputs can be visualized using the csv files. One example script is provide here:
+
+```
+import csv
+import os
+from collections import OrderedDict
+import matplotlib.pyplot as plt
+import numpy as np
+# plotting style
+import mplhep as hep
+plt.style.use(hep.style.CMS)
+
+throughputs = OrderedDict()
+latencys = OrderedDict()
+
+for model in ['particlenet_AK4', 'particlenet_AK4_PT']:
+    dirname = f'/home/yfeng/results/{model}'
+    if not os.path.isdir(dirname):
+        continue
+    throughputs[model] = OrderedDict()
+    latencys[model] = OrderedDict()
+
+    for batch in [1, 4, 8, 16, 32, 64, 128]:
+        fname = f'{dirname}/{model}_batch{batch}.csv'
+        if not os.path.isfile(fname):
+            continue
+        with open (fname, newline='') as csvfile:
+            datareader = csv.reader(csvfile)
+            for i, row in enumerate(datareader):
+                if i!=1:
+                    continue
+                print(row)
+                print(row[0])
+            throughputs[model][batch] = float(row[1])
+            latencys[model][batch] = float(row[-1])/1.0e3
+
+labels = {
+    'particlenet_AK4': 'PN-AK4 ONNX',
+    'deeptau_nosplit': 'DeepTau',
+}
+
+markers = ['*', '^', 's', '1']
+
+# make some throughputs and latency plots
+def Plot(models, outputname):
+    if len(models) == 0:
+        return
+    model = models[0]
+    batchs = np.array(list(throughputs[model].keys()), dtype=np.float32)
+
+    vals_throughput = [np.array(list(throughputs[model].values())) for model in models]
+    vals_latency = [np.array(list(latencys[model].values())) for model in models]
+
+    legends = [labels[model] for model in models]
+
+    fig, axs = plt.subplots(2,2, figsize=(20,8), gridspec_kw={'height_ratios': [3, 1]})
+    axs[0, 0].plot([], [], ' ', label="Tesla T4")
+    axs[1, 0].plot([], [], ' ', label="Tesla T4")
+    axs[0, 1].plot([], [], ' ', label="Tesla T4")
+    axs[1, 1].plot([], [], ' ', label="Tesla T4")
+
+    for i, model in enumerate(models):
+        axs[0, 0].plot(batchs, vals_throughput[i], label=legends[i], marker=markers[i], markersize=10)
+        axs[0, 1].plot(batchs, vals_latency[i],    label=legends[i], marker=markers[i], markersize=10)
+
+    for i, model in enumerate(models):
+        axs[1, 0].plot(batchs, vals_throughput[i]/vals_throughput[0])
+        axs[1, 1].plot(batchs, vals_latency[i]/vals_latency[0])
+
+    axs[1, 0].set_xlabel('Batch Size')
+    axs[1, 0].set_ylabel('Ratio')
+    axs[1, 0].set_xscale('log')
+    axs[0, 0].set_ylabel('Throughput [evt/s]')
+    axs[0, 0].set_xticklabels([])
+    axs[0, 0].set_xscale('log')
+    axs[0, 0].legend()
+
+    axs[1, 1].set_xlabel('Batch Size')
+    axs[1, 1].set_ylabel('Ratio')
+    axs[1, 1].set_xscale('log')
+    axs[0, 1].set_ylabel('Latency [ms]')
+    axs[0, 1].set_yscale('log')
+    axs[0, 1].set_xticklabels([])
+    axs[0, 1].set_xscale('log')
+    axs[0, 1].legend()
+
+    fig.subplots_adjust(hspace=0)
+    fig.savefig(f"{outputname}.png")
+Plot(['particlenet_AK4', 'deeptau_nosplit'], 'Test')
+```
+One example for DeepTau\_nosplit is shown in the following point:&#x20;
 
 ![Throughputs and latency vs batch size from perf client tests](<../.gitbook/assets/image (2).png>)
 
-For models with variable-length inputs, the input dimensions need to be fully configured for running perf client. An example command for running ParticleNet model:
-
+For models with variable-length inputs, the input dimensions need to be fully configured for running perf client with random or zero inputs. An example command for running ParticleNet model:
 ```
 perf_analyzer -m particlenet_AK4 --percentile=95 -u localhost:8021 --shape pf_points:2,50 --shape pf_features:20,50 --shape pf_mask:1,50 --shape sv_points:2,4 --shape sv_features:11,4 --shape sv_mask:1,4 -i grpc --async -p 9000 --concurrency-range 4:4 -b 100
 ```
+Passing a json file with inputs are also supported with `Perf Client`. More details can be found from the NVIDIA Triton User Guide.
