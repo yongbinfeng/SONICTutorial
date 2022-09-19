@@ -54,19 +54,19 @@ One can explore the optimal model configuration for deployment by running throug
 
 To run perf client, first launch the Triton server serving the models via
 
-```
+```bash
 docker run -it --gpus=1 --rm -p8000:8000 -p8001:8001 -p8002:8002 -v/path/to/triton/models/:/models nvcr.io/nvidia/tritonserver:21.10-py3 tritonserver --model-repository=/models/
 ```
 
 then run the Triton client via
 
-```
+```bash
 docker run -it --gpus=1 --rm --net=host -v/path/to/triton/models:/models nvcr.io/nvidia/tritonserver:21.10-py3-sdk
 ```
 
 Inside the Triton client container, exectuate the command
 
-```
+```bash
 perf_analyzer -m deeptau_nosplit --percentile=95 -u localhost:8001 -i grpc --async -p 9000 --concurrency-range 4:4 -b 100
 ```
 
@@ -97,7 +97,7 @@ which includes the throughput, latency, and some metrics on the server side. The
 
 One example script to loop over some models and varying the batch size is attached here:
 
-```
+```py
 import os
 from collections import OrderedDict
 import subprocess
@@ -123,7 +123,7 @@ This loops over two models and measures the throughputs and latency by varying t
 
 Then the outputs can be visualized using the csv files. One example script is provide here:
 
-```
+```py
 import csv
 import os
 from collections import OrderedDict
@@ -216,7 +216,7 @@ One example for DeepTau\_nosplit is shown in the following point:&#x20;
 ![Throughputs and latency vs batch size from perf client tests](<../.gitbook/assets/image (2).png>)
 
 For models with variable-length inputs, the input dimensions need to be fully configured for running perf client with random or zero inputs. An example command for running ParticleNet model:
-```
+```bash
 perf_analyzer -m particlenet_AK4 --percentile=95 -u localhost:8021 --shape pf_points:2,50 --shape pf_features:20,50 --shape pf_mask:1,50 --shape sv_points:2,4 --shape sv_features:11,4 --shape sv_mask:1,4 -i grpc --async -p 9000 --concurrency-range 4:4 -b 100
 ```
 Passing a json file with inputs are also supported with `Perf Client`. More details can be found from the NVIDIA Triton User Guide.
