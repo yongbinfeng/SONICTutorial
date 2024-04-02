@@ -9,13 +9,13 @@ description: Collection of some useful relevant paper, document, and code links 
 * CMS Workflow demonstration with as a service: [arxiv:2402.15366](https://arxiv.org/abs/2402.15366)
 * GPU coprocessors as a service for HEP: [arxiv.2007.10359](https://arxiv.org/abs/2007.10359)
 * GPU coprocessors as a service for neutrinos: [arxiv.2009.04509](https://arxiv.org/abs/2009.04509)
-* FPGAs as a service toolkit (FaaST): [arxiv.2010.08556](https://arxiv.org/abs/2010.08556)
+* FPGAs as a service toolkit (FaaST): [arxiv.2010.08556](https://arxiv.org/abs/2010.08556)
 * FPGA inference as a service: [arxiv.1904.08986](https://arxiv.org/pdf/1904.08986.pdf)
 
 ### Documents:
 
 * Some introductory slides for beginners: [Link](files/SONIC\_Introduction\_MLHATS.pdf)
-* Nvidia Triton Inference server document: [Link](https://docs.nvidia.com/deeplearning/triton-inference-server/archives/triton\_inference\_server\_230/user-guide/docs/)
+* NVIDIA Triton Inference server document: [Link](https://docs.nvidia.com/deeplearning/triton-inference-server/archives/triton\_inference\_server\_230/user-guide/docs/)
 * Distributed Triton documents with more details and latest developments: [Link](https://github.com/triton-inference-server/server/tree/main/docs)
 * SONIC Core module in CMSSW: [Link](https://github.com/cms-sw/cmssw/tree/master/HeterogeneousCore/SonicCore)
 * SONIC Triton module in CMSSW: [Link](https://github.com/cms-sw/cmssw/tree/master/HeterogeneousCore/SonicTriton)
