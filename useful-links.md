@@ -6,6 +6,7 @@ description: Collection of some useful relevant paper, document, and code links 
 
 ### Papers:
 
+* CMS Workflow demonstration with as a service: [arxiv:2402.15366](https://arxiv.org/abs/2402.15366)
 * GPU coprocessors as a service for HEP: [arxiv.2007.10359](https://arxiv.org/abs/2007.10359)
 * GPU coprocessors as a service for neutrinos: [arxiv.2009.04509](https://arxiv.org/abs/2009.04509)
 * FPGAs as a service toolkit (FaaST): [arxiv.2010.08556](https://arxiv.org/abs/2010.08556)

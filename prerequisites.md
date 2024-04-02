@@ -40,15 +40,21 @@ docker run -it --gpus=1 --rm --net=host -v/path/to/triton/models:/models nvcr.io
 
 where the `--net=host` argument is to use the host networking, so that you can ping the server with the correct ports running in a different container.
 
-### Run with Singularity
+### Run with Singularity/Apptainer
 
-&#x20;Some of the clusters do not support docker but Singularity. To run the images with Singularity, similar to the docker case, pull the image first:
+&#x20;Some of the clusters do not support docker but Singularity (or Apptainer). To run the images with Singularity, similar to the docker case, pull the image first:
 
 ```
 singularity pull triton_21.10.sif docker://nvcr.io/nvidia/tritonserver:21.10-py3
 ```
 
-which will pull the image from docker and save it as a `sif` file. More information can be found [here](https://sylabs.io/guides/3.2/user-guide/cli/singularity\_pull.html).
+which will pull the image from docker and save it as a `sif` file. More information can be found [here](https://sylabs.io/guides/3.2/user-guide/cli/singularity\_pull.html). Sometimes one might run into disk quota issues, as the default cache directory is under HOME directory. In this case, try running with
+
+```
+SINGULARITY_CACHEDIR=/directory/with/more/disk singularity pull triton_21.10.sif docker://nvcr.io/nvidia/tritonserver:21.10-py3
+```
+
+as provided [here](https://docs.sylabs.io/guides/3.3/user-guide/build\_env.html). Similar commands for Apptainer.
 
 Then run the container with:
 
@@ -57,6 +63,10 @@ singularity run --nv -B /path/to/triton/repo:/models triton_21.10.sif tritonserv
 ```
 
 remove the `--nv` option if not running on GPUs.
+
+### Run with Podman
+
+(To be updated.)
 
 ### Run with cmsTriton scripts
 
