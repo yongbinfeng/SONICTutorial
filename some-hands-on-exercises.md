@@ -23,7 +23,11 @@ export ContainerDir=$PWD/container
 export Workdir=$PWD/workdir
 ```
 
-The containers can also be downloaded from [https://cernbox.cern.ch/s/fzBYiDOlYQhNS8M](https://cernbox.cern.ch/s/fzBYiDOlYQhNS8M)
+The containers can also be downloaded from [https://cernbox.cern.ch/s/fzBYiDOlYQhNS8M](https://cernbox.cern.ch/s/fzBYiDOlYQhNS8M) On lxplus
+
+```
+export ContainerDir=/afs/cern.ch/work/y/yofeng/public/containers
+```
 
 ### Prepare files
 
