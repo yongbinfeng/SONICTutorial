@@ -30,7 +30,7 @@ Create the `WorkDir` and clone the relevant model and client code:
 ```bash
 mkdir $WorkDir
 cd $WorkDir
-git clone git@github.com:yongbinfeng/TritonDemo.git
+git clone https://github.com/yongbinfeng/TritonDemo.git
 ```
 
 Both the server and clients images have been cloned under `$ContainerDir` on LPC node.
