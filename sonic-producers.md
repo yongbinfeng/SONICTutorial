@@ -2,7 +2,7 @@
 description: Example and instructions on preparing a SONIC producer
 ---
 
-# SONIC Producers
+# SONIC Producers in CMS
 
 In CMSSW, SONIC Triton producers handle the communications between the server and the client (i.e., CMSSW itself). As explained in the [Introduction](introduction.md) section, the producer sends the inference request together with the model inputs via `acquire` function, and receives the inference outputs from the server via `produce`. A more detailed explanation is provided [here](https://github.com/cms-sw/cmssw/tree/master/HeterogeneousCore/SonicTriton#modules).
 
