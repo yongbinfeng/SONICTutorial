@@ -1,6 +1,6 @@
 ---
 description: >-
-  Basic introduction and tutorial for Service for Optimized Network Inference on Coprocessors
+  Basic tutorial for Service for Optimized Network Inference on Coprocessors
   (SONIC)
 ---
 
