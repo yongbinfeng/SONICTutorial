@@ -6,9 +6,7 @@ description: Quick introduction to SONIC
 
 Readers are strongly encouraged to go through the [introductory slides](files/SONIC\_Introduction\_MLHATS.pdf) first!&#x20;
 
-
-
-SONIC is the short name for Service for Optimized Network Inference on Coprocessors. It is based on inference as a service. Instead of the usual case where the coprocessors (GPUs, FPGAs, ASICs) are directly connected to the CPUs, as-a-Service connects the CPUs and coprocessors via networks. As shown in the diagram below, with as-a-Service computing, clients only need to communicate with the server and handle the IOs, and the servers will direct the coprocessors for computing.
+SONIC is the acronym for Service for Optimized Network Inference on Coprocessors. It is based on inference as a service. Instead of the usual case where the coprocessors (GPUs, FPGAs, ASICs) are directly connected to the CPUs, as-a-Service connects the CPUs and coprocessors **via networks**. As shown in the diagram below, with as-a-Service computing, clients only need to communicate with the server and handle the IOs, and the servers will direct the coprocessors for computing.
 
 ![Direct connection vs as-a-service](<.gitbook/assets/image (1) (1).png>)
 
