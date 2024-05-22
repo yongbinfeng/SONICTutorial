@@ -11,3 +11,4 @@
 * [SONIC Producers](sonic-producers.md)
 * [Latency and Throughput Benchmark](latency-and-throughput-benchmark.md)
 * [A full working demo](a-full-working-demo.md)
+* [Some hands-on exercises](some-hands-on-exercises.md)
