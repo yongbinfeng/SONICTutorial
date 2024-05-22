@@ -12,7 +12,16 @@ For CMS students, log into the [LPC GPU nodes](./):
 export ContainerDir=/uscms_data/d3/yfeng/SONICTutorial/containers
 </code></pre>
 
-Local computers should also work fine if you have docker/podman/apptainer supports.
+For people without CMS access, local computers should also work fine if you have docker/podman/apptainer supports. For example, with apptainers, pull the container images:
+
+```bash
+mkdir container
+mkdir workdir
+APPTAINER_CACHEDIR=/path_to_cache singularity pull container/triton_22.07.sif docker://nvcr.io/nvidia/tritonserver:22.07-py3
+APPTAINER_CACHEDIR=/path_to_cache singularity pull container/triton_22.07.sdk.sif docker://nvcr.io/nvidia/tritonserver:22.07-sdk-py3
+export ContainerDir=$PWD/container
+export Workdir=$PWD/workdir
+```
 
 ### Prepare files
 
