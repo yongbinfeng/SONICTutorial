@@ -23,6 +23,8 @@ export ContainerDir=$PWD/container
 export Workdir=$PWD/workdir
 ```
 
+The containers can also be downloaded from [https://cernbox.cern.ch/s/fzBYiDOlYQhNS8M](https://cernbox.cern.ch/s/fzBYiDOlYQhNS8M)
+
 ### Prepare files
 
 Create the `WorkDir` and clone the relevant model and client code:
